@@ -14,7 +14,6 @@ typedef struct {
 		char name[MAX_NAME_LEN];
 		char party[PARTY_CHAR_LEN];
 		int age;
-		char symbol;
 		int vote_amt;
 } Candidate;
 
@@ -40,7 +39,31 @@ void list_candidates(Candidate candidates[]){
 		printf("Candidate Name: %s\n", candidates[i].name);
 		printf("Candidate Party: %s\n", candidates[i].party);
 		printf("Candidate Age: %d\n", candidates[i].age);
-		printf("---------------------");
+		printf("Candidate Vote Count: %d\n", candidates[i].vote_amt);
+		printf("--------------------- \n");
+	}
+
+}
+
+void cast_vote(Candidate candidates[], int candidate_amount) {
+
+	if (candidate_amount == 0) {
+		printf("No candidates available.\n");
+	} else {
+
+		char candidate_choice[100];
+
+		printf("Available Candidates: \n");
+
+		for (int i; i < candidate_amount; i++){
+			printf("(%d) %s\n", i, candidates[i].name);
+		}
+
+		printf("Cast a vote for a candidate: \n");
+		scanf(" %s", candidate_choice);
+
+		printf("You selected %s %s\n", candidate_choice, candidates[atoi(candidate_choice)].name);
+		candidates[atoi(candidate_choice)].vote_amt += 1;
 	}
 
 }
@@ -66,13 +89,14 @@ int main(void) {
 			break;
 
 		case '3':
+			cast_vote(candidates, candidate_amount);
 			break;
 
 		case '4':
 			return 0;
 
 		default:
-			printf("Invalid Input");
+			printf("Invalid Input\n");
 			break;
 	}
 }
