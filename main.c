@@ -81,7 +81,12 @@ int main(void) {
 
 	switch(user_input) {
 		case '1':
-			add_candidate(candidates, candidate_amount);
+
+			if (candidate_amount < MAX_CANDIDATES) {
+				add_candidate(candidates, candidate_amount);
+		} else {
+		printf("Max amount of candidates entered.");
+	}
 			break;
 
 		case '2':
